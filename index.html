@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework 04: Coding Quiz</title>
 
-<!-- Bootstrap CDN. Use these to get the streamlined look, and responsive requirements outlined below. -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CDN. Use these to get the streamlined look, and responsive requirements outlined below. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!--Custom styles sheet link in case I need to overwrite any bootstrap or hand tweak anything-->
+    <!--Custom styles sheet link in case I need to overwrite any bootstrap or hand tweak anything-->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <!--OVERALL GOAL-->
 <!--Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.-->
+
 <body>
 
-    <div class="jumbotron">
+    <div class="container col-lg-12" height="150px"
+        style="margin-bottom: 20px; background-color: lightgray; padding: 20px;">
         <h1 class="text-center">Code Quiz</h1>
         <h2 class="text-center">Test your coding mettle against your friends. Despair at your low score!
         </h2>
-      </div>
-    
+    </div>
+
     <div class="container col-lg-12">
         <div class="row col-lg-3" style="position: relative; float: left;">
             <button id="viewHigh" class="btn btn-danger btn-choice">
-            <p>View High Scores</p> 
-            </button>    
+                <p>View High Scores</p>
+            </button>
+        </div>
+        <div id="begin">Begin the Quiz!</div>
+        <div id="quiz" class="row col-lg-6"
+            style="position: relative; float: left; flex-direction: column; text-align: center; display:none;">
+            <div id="question">
+                <p> Here is where a quiz goes! Are you excited? Be excited!</p>
+            </div>
+            <div id="answers">
+                <!--These are going to need to be Divs, not buttons. I can't figure out how to make it work with buttons-->
+                <div id="answer1" class="answer" value="1" onclick="checkAnswer('1')">
+                    <p>Answer 1</p>
+                </div>
+
+                <div id="answer2" class="answer" value="2" onclick="checkAnswer('2')">
+                    <p>Answer 2</p>
+                </div>
+
+                <div id="answer3" class="answer" value="3" onclick="checkAnswer('3')">
+                    <p>Answer 3</p>
+                </div>
+
+                <div id="answer4" class="answer" value="4" onclick="checkAnswer('4')">
+                    <p>Answer 4</p>
+                </div>>
+            </div>
+            <div id="rightWrong" style="display: none;">
+                <h3>Wrong!</h3>
+            </div>
         </div>
 
-        <div class="row col-lg-6" style="position: relative; float: left; flex-direction: column; text-align: center;">
-            <h3>Here is where a quiz goes! Are you excited? Be excited!</h3>
-            <button id="1" class="btn btn-danger btn-choice" value="1">
-            <p>Answer 1</p>
-            </button> <br>
+        <div class="row col-lg-3" style="position: relative; float: right; text-align: right; margin-right: 0px;"
+            id="timerDiv">
 
-            <button id="2" class="btn btn-danger btn-choice" value="2">
-            <p>Answer 2</p>
-            </button> <br>
-
-            <button id="3" class="btn btn-danger btn-choice" value="3">
-            <p>Answer 3</p>
-            </button> <br>
-
-            <button id="4" class="btn btn-danger btn-choice" value="4">
-            <p>Answer 4</p>
-            </button> <br>
-            <h3>Wrong!</h3>
-        </div>
-
-        <div class="row col-lg-3" style="position: relative; float: right; text-align: right; margin-right: 0px;">
-            <h3 id="timerDiv"></h3>    
         </div>
     </div>
-<!--Look at API sample exercise for examples of how to use a fixed set of Divs to display dynamically generated content from Javascript. In general these lessons and the Bootstrap lessons will be important to review and modify.-->
+    <!--Look at API sample exercise for examples of how to use a fixed set of Divs to display dynamically generated content from Javascript. In general these lessons and the Bootstrap lessons will be important to review and modify.-->
 
-<script src="./script.js"></script>   
+    <script src="./script.js"></script>
 </body>
+
 </html>
