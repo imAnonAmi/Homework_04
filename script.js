@@ -1,9 +1,26 @@
 //Heavy lifter page for Homework 04: Coding Quiz. Pseudo code in comments below
 
-//Probably wrap the whole thing in an IF/ELSE statement tied to the timer. IF timer is active, quiz continues, ELSE stop quiz and move onto scoring funcitons etc. This way decrementation of timer or completion of quiz can essentially end the function and move on.
+//Define global variables here
+
+//Probably wrap the whole thing in an IF/ELSE statement tied to the timer. IF timer is active, quiz continues, ELSE stop quiz and move onto scoring functions etc. This way decrementation of timer or completion of quiz can essentially end the function and move on.
+
+
+ // replace this with the div I assign the count to so it is shown text += cars[i] + "<br>";
+
 
 //So start by building the below
 //WHEN I click the start button (calls the timer function, begins quiz)
+//Below timer works, in that it counts down from 75, and stops. But still needs to be initiated by Start button, and prevent further questions (i.e. end quiz when it completes)
+var timeRemains = 75;
+var countDownTimer = setInterval(function(){
+    document.getElementById("timerDiv").innerHTML = timeRemains + " seconds left";
+    timeRemains -= 1;
+    if (timeRemains <= 0){
+        clearInterval(countDownTimer);
+        document.getElementById("timerDiv").innerHTML = "Time Is Up!";
+    
+    }
+}, 1000);
 //THEN a timer starts and I am presented with a question (timer needs to be value in a for statement, allowing for outside modification due to bad question answering)
 
 //The below can ALL be a function running through a series of arrays representing answers, I believe.
