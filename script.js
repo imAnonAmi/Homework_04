@@ -2,21 +2,20 @@
 
 //Define global variables here, might not need all of these
 var begin = document.getElementById("begin");
-
 var quiz = document.getElementById("quiz");
-
 var question = document.getElementById("question");
+var initScore = document.getElementById("initScore");
 var score = 0;
-
 var timer = document.getElementById("timerDiv");
-
+var feedback = document.getElementById("rightWrong");
 var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
+var initals = document.getElementById("initials");
 
 //Try to define all questions as an array of objects? That makes sense right?
-//Addendum: Commas, NOT semi-colons in objects goddammit! 45 min of debugging because I can not remember the damn syntax. Remember bettter!
+//Addendum: Commas, NOT semi-colons in objects dammit! 45 min of debugging because I cannot remember the damn syntax. Remember bettter!
 var allQuestions = [{
     question: "Commonly used data types do NOT include",
     answer1: "Strings",
@@ -58,17 +57,14 @@ var allQuestions = [{
     correctAnswer: "3"
 },
 {
-    question: "Forcing students to watch blurry ass .GIFs over and over again as their only method to access these questions is:",
+    question: "Forcing students to watch blurry .GIFs over and over again as their only method to access these questions is:",
     answer1: "Likely prohibited by the Geneva Convention",
-    answer2: "Likely to cause mental anguish",
+    answer2: "Going to cause mental anguish",
     answer3: "Hilarity made manifest",
     answer4: "All of the above... you monster.",
     correctAnswer: "4"
 }
 ]
-
-
-
 //So start by building the below
 
 //WHEN I click Begin (calls the timer function, begins quiz)
@@ -76,7 +72,6 @@ begin.addEventListener("click", beginQuiz);
 
 //Below timer works, in that it counts down from 75, and stops. But still needs to be initiated by Start button, and prevent further questions (i.e. end quiz when it completes)
 //Modified this to work,I think?
-
 var timeRemains = 75;
 function beginQuiz() {
     begin.style.display = "none";
@@ -95,10 +90,7 @@ var countDownTimer = setInterval(function () {
 
 quiz.style.display = "block";
 askQuestions();
-
 }
-
-
 //ASKING QUESTIONS
 //The below can ALL be a function running through a series of arrays representing answers, I believe.
 var finalQuestion = questions.length - 1;
@@ -112,19 +104,20 @@ function askQuestions() {
     answer3.innerHTML = i.answer3;
     answer4.innerHTML = i.answer4;
 }
-
 //WHEN I answer a question correctly (var answer = specific array index id)
 //THEN I am presented with another question (moves on to next answer array index)
 function checkAnswer(answer) {
     if (question[currentQuestion].correct == answer) {
         score += 10;
-        answeredRight();
+        feedback.style.display = "block";
+        feedback.innerHTML = "<h2>"+ "Correct!" +"</h2>";
     }
     //WHEN I answer a question incorrectly (var answer != specific array index id)
     //THEN time is subtracted from the clock (timer value decremented by specified amount. IF this reduces timer to 0 or below, quiz over, move on to question scoring and high scores)       
     else {
         timeRemains -= 10;
-        answeredWrong();
+        feedback.style.display = "block";
+        feedback.innerHTML = "<h2>"+ "You are Wrong!" + "</h2>";
     }
     //This is the quiz over code, whether due to time running out or answering all questions
     // WHEN all questions are answered or the timer reaches 0 (OR statement)
@@ -141,9 +134,21 @@ function checkAnswer(answer) {
 
 // I love you auto-format!
 
-
-
 //Scoring and initials.
 //WHEN the game is over
 //THEN I can save my initials and score (Might see if I can confirm that score deserves to be in high scores before saving, BUT, that's polish once core functionality is done.)
+function scoreQuiz() {
+initScore.style.display="block";
+initScore.innerHTML= "<h3>"+ "Your score is: "+ score +"</h3>" + "<br>";
+}
+//Right now using two functions to do this because brain is not working
+function saveScore(){
+var yourData = {
+    score: score,
+    initials: initials,
+}
+window.localStorage.setItem('result', JSON.stringify(yourData));
+window.location = "scores.html";
+}
+
 //IMPORTANT! Demo .GIF shows choosing the option to Go Back (i.e. to Start screen) and to Clear High Scores (wipe local storage). This is not in README, so make sure and include it.
