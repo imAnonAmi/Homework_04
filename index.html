@@ -40,19 +40,19 @@
             </div>
             <div id="answers">
                 <!--These are going to need to be Divs, not buttons. I can't figure out how to make it work with buttons-->
-                <div id="answer1" class="answer" value="1" onclick="checkAnswer('1')">
+                <div id="answer1" class="answer" value="1" onclick = "checkAnswer(1)";>
                     <p>Answer 1</p>
                 </div>
 
-                <div id="answer2" class="answer" value="2" onclick="checkAnswer('2')">
+                <div id="answer2" class="answer" value="2" onclick="checkAnswer('2')";>
                     <p>Answer 2</p>
                 </div>
 
-                <div id="answer3" class="answer" value="3" onclick="checkAnswer('3')">
+                <div id="answer3" class="answer" value="3" onclick="checkAnswer('3')";>
                     <p>Answer 3</p>
                 </div>
 
-                <div id="answer4" class="answer" value="4" onclick="checkAnswer('4')">
+                <div id="answer4" class="answer" value="4" onclick="checkAnswer('4')";>
                     <p>Answer 4</p>
                 </div>>
             </div>
@@ -62,6 +62,10 @@
         </div>
         <div id="initScore" style="display: none;">
             <h3 id="scoreResults"></h3>
+            <form onsubmit="saveScore()">
+                Enter your initials: <input id="initials" type="text">
+                <input type="submit">
+              </form>
         </div>
 
         <div class="row col-lg-3" style="position: relative; float: right; text-align: right; margin-right: 0px;"

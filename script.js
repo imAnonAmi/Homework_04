@@ -93,32 +93,40 @@ askQuestions();
 }
 //ASKING QUESTIONS
 //The below can ALL be a function running through a series of arrays representing answers, I believe.
-var finalQuestion = questions.length - 1;
+var finalQuestion = allQuestions.length - 1;
 var currentQuestion = 0;
 
 function askQuestions() {
-    var i = questions[currentQuestion];
+    var i = allQuestions[currentQuestion];
     question.innerHTML = "<h3>" + i.question + "</h3>";
     answer1.innerHTML = i.answer1;
     answer2.innerHTML = i.answer2;
     answer3.innerHTML = i.answer3;
     answer4.innerHTML = i.answer4;
+   
 }
+
+
 //WHEN I answer a question correctly (var answer = specific array index id)
 //THEN I am presented with another question (moves on to next answer array index)
+
+//Ugh. Need to read my syntax and console.log to victory
 function checkAnswer(answer) {
-    if (question[currentQuestion].correct == answer) {
+    var answer = document.getElementsByClassName("answer").value;
+    if (allQuestions[currentQuestion].correctAnswer = answer) {
         score += 10;
         feedback.style.display = "block";
         feedback.innerHTML = "<h2>"+ "Correct!" +"</h2>";
-    }
+}
     //WHEN I answer a question incorrectly (var answer != specific array index id)
     //THEN time is subtracted from the clock (timer value decremented by specified amount. IF this reduces timer to 0 or below, quiz over, move on to question scoring and high scores)       
     else {
         timeRemains -= 10;
         feedback.style.display = "block";
         feedback.innerHTML = "<h2>"+ "You are Wrong!" + "</h2>";
+    
     }
+    
     //This is the quiz over code, whether due to time running out or answering all questions
     // WHEN all questions are answered or the timer reaches 0 (OR statement)
     // THEN the game is over (End function Take Quiz, move on to Score Quiz, and Enter Initials)
