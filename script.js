@@ -16,6 +16,13 @@ var initals = document.getElementById("initials");
 var countDownTimer;
 var scoreArray;
 
+//Simple nav function to View High Scores
+document.getElementById("viewHigh").addEventListener("click", viewHighNow);
+
+function viewHighNow(event){
+    event.preventDefault();
+    window.location.href = "scores.html";
+}
 //Try to define all questions as an array of objects? That makes sense right?
 //Addendum: Commas, NOT semi-colons in objects dammit! 45 min of debugging because I cannot remember the damn syntax. Remember bettter!
 var allQuestions = [{

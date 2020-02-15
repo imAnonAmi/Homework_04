@@ -35,11 +35,32 @@
      
       </tbody>
       </table>
+      <div class="col-lg-6"style="padding: 20px; position: relative;">
+      <button type="button" id="goBack" class="btn btn-danger btn-choice>"><p>Go back to quiz</p></button>
+      <button type="button" id="clearScore" class="btn btn-danger btn-choice>"><p>Clear scores</p></button>
     </div>
+  </div>
+  
 <script>
 
+var goBackDo = document.getElementById("goBack");
+var clearScoreDo = document.getElementById("clearScore");
 var finalResult = JSON.parse(localStorage.getItem("result"));
 
+document.getElementById("goBack").addEventListener("click", goBackNow);
+
+function goBackNow(event){
+    event.preventDefault();
+    window.location.href = "index.html";
+}
+
+document.getElementById("clearScore").addEventListener("click", clearScoreNow);
+
+function clearScoreNow(event){
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = "scores.html";
+}
 finalResult.forEach(element => {
   var tableRow = document.createElement("tr");
   document.getElementById("scoreTable").append(tableRow);
