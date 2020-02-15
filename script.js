@@ -13,6 +13,8 @@ var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var initals = document.getElementById("initials");
+var countDownTimer;
+var scoreArray;
 
 //Try to define all questions as an array of objects? That makes sense right?
 //Addendum: Commas, NOT semi-colons in objects dammit! 45 min of debugging because I cannot remember the damn syntax. Remember bettter!
@@ -77,7 +79,7 @@ function beginQuiz() {
     begin.style.display = "none";
 
 //THEN a timer starts and I am presented with a question (time remains to be outside function due to scope, allowing for outside modification from  bad question answering)
-var countDownTimer = setInterval(function () {
+countDownTimer = setInterval(function () {
     document.getElementById("timerDiv").innerHTML = timeRemains + " seconds left";
     timeRemains -= 1;
     if (timeRemains <= 0) {
@@ -95,7 +97,8 @@ askQuestions();
 //The below can ALL be a function running through a series of arrays representing answers, I believe.
 var finalQuestion = allQuestions.length - 1;
 var currentQuestion = 0;
-
+var dammit = ("");
+var correct = ("");
 function askQuestions() {
     var i = allQuestions[currentQuestion];
     question.innerHTML = "<h3>" + i.question + "</h3>";
@@ -103,17 +106,21 @@ function askQuestions() {
     answer2.innerHTML = i.answer2;
     answer3.innerHTML = i.answer3;
     answer4.innerHTML = i.answer4;
-   
+    correct = i.correctAnswer;
+    console.log(correct);
+    
 }
 
+console.log(correct);
 
 //WHEN I answer a question correctly (var answer = specific array index id)
 //THEN I am presented with another question (moves on to next answer array index)
 
 //Ugh. Need to read my syntax and console.log to victory
 function checkAnswer(answer) {
-    var answer = document.getElementsByClassName("answer").value;
-    if (allQuestions[currentQuestion].correctAnswer = answer) {
+        console.log(answer);
+        console.log(correct);
+    if (correct == answer) {
         score += 10;
         feedback.style.display = "block";
         feedback.innerHTML = "<h2>"+ "Correct!" +"</h2>";
@@ -146,17 +153,28 @@ function checkAnswer(answer) {
 //WHEN the game is over
 //THEN I can save my initials and score (Might see if I can confirm that score deserves to be in high scores before saving, BUT, that's polish once core functionality is done.)
 function scoreQuiz() {
+quiz.style.display = "none";
 initScore.style.display="block";
 initScore.innerHTML= "<h3>"+ "Your score is: "+ score +"</h3>" + "<br>";
+formScore.style.display="block";
 }
 //Right now using two functions to do this because brain is not working
-function saveScore(){
+document.getElementById("Grr").addEventListener("click", saveScore);
+if (localStorage.getItem("result")){
+    scoreArray = JSON.parse(localStorage.getItem("result"));
+}
+else {
+scoreArray=[];}
+function saveScore(event){
+    event.preventDefault();
+
 var yourData = {
     score: score,
-    initials: initials,
+    initials: document.getElementById("initials").value
 }
-window.localStorage.setItem('result', JSON.stringify(yourData));
-window.location = "scores.html";
+scoreArray.push(yourData);
+window.localStorage.setItem("result", JSON.stringify(scoreArray));
+window.location.href = "scores.html";
 }
 
 //IMPORTANT! Demo .GIF shows choosing the option to Go Back (i.e. to Start screen) and to Clear High Scores (wipe local storage). This is not in README, so make sure and include it.
