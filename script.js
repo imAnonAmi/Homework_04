@@ -19,12 +19,12 @@ var scoreArray;
 //Simple nav function to View High Scores
 document.getElementById("viewHigh").addEventListener("click", viewHighNow);
 
-function viewHighNow(event){
+function viewHighNow(event) {
     event.preventDefault();
     window.location.href = "scores.html";
 }
 //Try to define all questions as an array of objects? That makes sense right?
-//Addendum: Commas, NOT semi-colons in objects dammit! 45 min of debugging because I cannot remember the damn syntax. Remember bettter!
+//Addendum: Commas, NOT semi-colons in objects! Remember bettter!
 var allQuestions = [{
     question: "Commonly used data types do NOT include",
     answer1: "Strings",
@@ -32,7 +32,7 @@ var allQuestions = [{
     answer3: "Alerts",
     answer4: "Numbers",
     correctAnswer: "3"
-}, //FFFFFFFFUUUUUUUUU. And commas after a given object in an array. Damn you syntax, damn you to hell!
+},
 {
     question: "The condition in an IF/ELSE statement is enclosed within _______?",
     answer1: "Quotes",
@@ -70,7 +70,7 @@ var allQuestions = [{
     answer1: "Likely prohibited by the Geneva Convention",
     answer2: "Going to cause mental anguish",
     answer3: "Hilarity made manifest",
-    answer4: "All of the above... you monster.",
+    answer4: "All of the above... Mwuhahahahah.",
     correctAnswer: "4"
 }
 ]
@@ -85,20 +85,20 @@ var timeRemains = 75;
 function beginQuiz() {
     begin.style.display = "none";
 
-//THEN a timer starts and I am presented with a question (time remains to be outside function due to scope, allowing for outside modification from  bad question answering)
-countDownTimer = setInterval(function () {
-    document.getElementById("timerDiv").innerHTML = timeRemains + " seconds left";
-    timeRemains -= 1;
-    if (timeRemains <= 0) {
-        clearInterval(countDownTimer);
-        document.getElementById("timerDiv").innerHTML = "Time Is Up!";
-        scoreQuiz();
+    //THEN a timer starts and I am presented with a question (time remains to be outside function due to scope, allowing for outside modification from  bad question answering)
+    countDownTimer = setInterval(function () {
+        document.getElementById("timerDiv").innerHTML = "<h1>" + timeRemains + " seconds left" + "</h1>";
+        timeRemains -= 1;
+        if (timeRemains <= 0) {
+            clearInterval(countDownTimer);
+            document.getElementById("timerDiv").innerHTML = "Time Is Up!";
+            scoreQuiz();
 
-    }
-}, 1000);
+        }
+    }, 1000);
 
-quiz.style.display = "block";
-askQuestions();
+    quiz.style.display = "block";
+    askQuestions();
 }
 //ASKING QUESTIONS
 //The below can ALL be a function running through a series of arrays representing answers, I believe.
@@ -108,39 +108,38 @@ var dammit = ("");
 var correct = ("");
 function askQuestions() {
     var i = allQuestions[currentQuestion];
-    question.innerHTML = "<h3>" + i.question + "</h3>";
-    answer1.innerHTML = i.answer1;
-    answer2.innerHTML = i.answer2;
-    answer3.innerHTML = i.answer3;
-    answer4.innerHTML = i.answer4;
+    question.innerHTML = "<h2>" + i.question + "</h2>";
+    answer1.innerHTML = "<h3>" + i.answer1 + "</h3>";
+    answer2.innerHTML = "<h3>" + i.answer2 + "</h3>";
+    answer3.innerHTML = "<h3>" + i.answer3 + "</h3>";
+    answer4.innerHTML = "<h3>" + i.answer4 + "</h3>";
     correct = i.correctAnswer;
-    console.log(correct);
-    
+
+
 }
 
-console.log(correct);
+
 
 //WHEN I answer a question correctly (var answer = specific array index id)
 //THEN I am presented with another question (moves on to next answer array index)
 
 //Ugh. Need to read my syntax and console.log to victory
 function checkAnswer(answer) {
-        console.log(answer);
-        console.log(correct);
+
     if (correct == answer) {
         score += 10;
         feedback.style.display = "block";
-        feedback.innerHTML = "<h2>"+ "Correct!" +"</h2>";
-}
+        feedback.innerHTML = "<h2>" + "Correct!" + "</h2>";
+    }
     //WHEN I answer a question incorrectly (var answer != specific array index id)
     //THEN time is subtracted from the clock (timer value decremented by specified amount. IF this reduces timer to 0 or below, quiz over, move on to question scoring and high scores)       
     else {
         timeRemains -= 10;
         feedback.style.display = "block";
-        feedback.innerHTML = "<h2>"+ "You are Wrong!" + "</h2>";
-    
+        feedback.innerHTML = "<h2>" + "You are Wrong!" + "</h2>";
+
     }
-    
+
     //This is the quiz over code, whether due to time running out or answering all questions
     // WHEN all questions are answered or the timer reaches 0 (OR statement)
     // THEN the game is over (End function Take Quiz, move on to Score Quiz, and Enter Initials)
@@ -160,28 +159,31 @@ function checkAnswer(answer) {
 //WHEN the game is over
 //THEN I can save my initials and score (Might see if I can confirm that score deserves to be in high scores before saving, BUT, that's polish once core functionality is done.)
 function scoreQuiz() {
-quiz.style.display = "none";
-initScore.style.display="block";
-initScore.innerHTML= "<h3>"+ "Your score is: "+ score +"</h3>" + "<br>";
-formScore.style.display="block";
+    quiz.style.display = "none";
+    initScore.style.display = "block";
+    //Displays string with point totals
+    initScore.innerHTML = "<h3>" + "Your score is: " + score + "</h3>" + "<br>";
+    //Target for the initial entry form
+    formScore.style.display = "block";
 }
 //Right now using two functions to do this because brain is not working
 document.getElementById("Grr").addEventListener("click", saveScore);
-if (localStorage.getItem("result")){
+if (localStorage.getItem("result")) {
     scoreArray = JSON.parse(localStorage.getItem("result"));
 }
 else {
-scoreArray=[];}
-function saveScore(event){
+    scoreArray = [];
+}
+function saveScore(event) {
     event.preventDefault();
 
-var yourData = {
-    score: score,
-    initials: document.getElementById("initials").value
-}
-scoreArray.push(yourData);
-window.localStorage.setItem("result", JSON.stringify(scoreArray));
-window.location.href = "scores.html";
+    var yourData = {
+        score: score,
+        initials: document.getElementById("initials").value
+    }
+    scoreArray.push(yourData);
+    window.localStorage.setItem("result", JSON.stringify(scoreArray));
+    window.location.href = "scores.html";
 }
 
 //IMPORTANT! Demo .GIF shows choosing the option to Go Back (i.e. to Start screen) and to Clear High Scores (wipe local storage). This is not in README, so make sure and include it.

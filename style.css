@@ -1,1 +1,28 @@
 /* Custom stylesheet in case I want to overwrite anything from Bootstrap for Homework 04: Coding Quiz*/
+/* On screens that are 600px wide or less, make the menu links stack on top of each other instead of next to each other, and hide High Score button*/
+@media screen and (max-width: 600px) {
+  #holdsAll{
+    float: none;
+    width: 100%;
+  }
+
+@media screen and (max-width: 600px) {
+    #quiz{
+      float: none;
+      width: 100%;
+    }
+ @media screen and (max-width: 600px) {
+        #bottomButton{
+          float: none;
+          width: 100%;
+        }
+@media screen and (max-width: 600px) {
+    #scoreTable {
+        float: none;
+        width: 100%;
+    }
+@media screen and (max-width: 600px) {
+    #viewHigh {
+        display: none;
+        }
+    }}}}}

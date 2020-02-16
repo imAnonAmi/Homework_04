@@ -19,42 +19,52 @@
 
 <body>
 
-    <div class="container col-lg-12" height="150px"
+    <div class="container-fluid" height="150px"
         style="margin-bottom: 20px; background-color: lightgray; padding: 20px;">
         <h1 class="text-center">Code Quiz</h1>
         <h2 class="text-center">Test your coding mettle against your friends. Despair at your low score!
         </h2>
     </div>
 
-    <div class="container col-lg-12">
-        <div class="row col-lg-3" style="position: relative; float: left;">
-            <button id="viewHigh" class="btn btn-danger btn-choice">
-                <p>View High Scores</p>
+    <div id="holdsAll" class="container-fluid"
+        style="float: left;  align-content: center; text-align: center; padding: 25px;">
+        <div class="row-lg-3" style="position: relative; float: left; padding: 20px; align-content: center;">
+            <button id="viewHigh" class="btn btn-danger btn-choice"
+                style="position: relative; float: left; align-content: center; padding: 20px;">
+                <h2>View High Scores</h2>
             </button>
         </div>
-        <div id="begin">Begin the Quiz!</div>
-        <div id="quiz" class="row col-lg-6"
+        <div class="row-lg-3" style="position: relative; float: right; padding: 20px; align-content: center;">
+            <button id="begin" style="position: relative; float: left; align-content: center; padding: 20px;"
+                class="btn btn-danger btn-choice">
+                <h2>Begin the Quiz!</h2>
+            </button></div>
+        <div id="quiz" class="col-lg-6"
             style="position: relative; float: left; flex-direction: column; text-align: center; display:none;">
             <div id="question">
                 <p> Here is where a quiz goes! Are you excited? Be excited!</p>
             </div>
-            <div id="answers">
-                <!--These are going to need to be Divs, not buttons. I can't figure out how to make it work with buttons-->
-                <div id="answer1" class="answer" value="1" onclick = "checkAnswer(1)";>
+            <div id="answers" style="padding: 10px; align-content: center; ">
+                <!--These are going to need to be Divs-->
+                <div id="answer1" class="answer" value="1"
+                    style="padding: 10px; background-color: lightslategrey; margin: 15px;" onclick="checkAnswer(1)" ;>
                     <p>Answer 1</p>
                 </div>
 
-                <div id="answer2" class="answer" value="2" onclick="checkAnswer('2')";>
+                <div id="answer2" class="answer" value="2"
+                    style="padding: 10px; background-color: lightsteelblue; margin: 15px;" onclick="checkAnswer('2')" ;>
                     <p>Answer 2</p>
                 </div>
 
-                <div id="answer3" class="answer" value="3" onclick="checkAnswer('3')";>
+                <div id="answer3" class="answer" value="3"
+                    style="padding: 10px; background-color: lightslategrey; margin: 15px;" onclick="checkAnswer('3')" ;>
                     <p>Answer 3</p>
                 </div>
 
-                <div id="answer4" class="answer" value="4" onclick="checkAnswer('4')";>
+                <div id="answer4" class="answer" value="4"
+                    style="padding: 10px; background-color: lightsteelblue; margin: 15px;" onclick="checkAnswer('4')" ;>
                     <p>Answer 4</p>
-                </div>>
+                </div>
             </div>
             <div id="rightWrong" style="display: none;">
                 <h3>Wrong!</h3>
@@ -65,17 +75,18 @@
             <form onsubmit="saveScore()">
                 Enter your initials: <input id="initials" type="text">
                 <input type="submit">
-              </form>
+            </form>
         </div>
-        <div id="formScore" style="display: none;">
-            <h3 id="scoreResults"></h3>
-            <form>
-                Enter your initials: <input id="initials" type="text">
-                <input id= "Grr" type="submit">
-              </form>
+        <div class="d-flex justify-content-around">
+            <div id="formScore" style="display: none;">
+                <h3 id="scoreResults"></h3>
+                <form>
+                    <h3>Enter your initials: </h3> <input id="initials" type="text">
+                    <input id="Grr" type="submit">
+                </form>
+            </div>
         </div>
-
-        <div class="row col-lg-3" style="position: relative; float: right; text-align: right; margin-right: 0px;"
+        <div class="row-lg-3" style="position: relative; float: right; text-align: right; margin-right: 0px;"
             id="timerDiv">
 
         </div>
